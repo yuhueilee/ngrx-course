@@ -5,7 +5,7 @@ import {select, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {map} from 'rxjs/operators';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
-import { logout } from './auth/auth.actions';
+import { logout, login } from './auth/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +25,15 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+
+      const userProfile: string = localStorage.getItem('user');
+
+      if (userProfile) {
+        // dispatch login action
+        // parse the userProfile string to User object
+        // pass it to user payload in login action
+        this.store.dispatch(login({user: JSON.parse(userProfile)}));
+      }
 
       this.router.events.subscribe(event  => {
         switch (true) {

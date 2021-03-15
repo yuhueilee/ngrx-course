@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { User } from './model/user.model';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
@@ -6,6 +7,8 @@ import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects {
+
+    // side note: stop the angular cli if developing effect
 
     login$ = createEffect(() => 
         this.actions$.pipe(
@@ -17,7 +20,19 @@ export class AuthEffects {
     , {dispatch: false} // to indicate that this effect does not result in a dispatch of action
     );
 
-    constructor(private actions$: Actions) {
+    logout$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(AuthActions.logout), // similar to filter the type
+            tap(action => {
+                localStorage.removeItem('user');
+                this.router.navigateByUrl('/login');
+            })
+        )
+    , {dispatch: false} // to indicate that this effect does not result in a dispatch of action
+    );
+
+    constructor(private actions$: Actions,
+        private router: Router) {
     }
 
 }
