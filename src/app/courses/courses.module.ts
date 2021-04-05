@@ -1,3 +1,4 @@
+import { EffectsModule } from '@ngrx/effects';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HomeComponent} from './home/home.component';
@@ -26,6 +27,7 @@ import {compareCourses, Course} from './model/course';
 
 import {compareLessons, Lesson} from './model/lesson';
 import { CoursesResolver } from './courses.resolver';
+import { CoursesEffects } from './course.effects';
 
 
 export const coursesRoutes: Routes = [
@@ -61,7 +63,8 @@ export const coursesRoutes: Routes = [
     MatDatepickerModule,
     MatMomentDateModule,
     ReactiveFormsModule,
-    RouterModule.forChild(coursesRoutes)
+    RouterModule.forChild(coursesRoutes),
+    EffectsModule.forFeature([CoursesEffects])
   ],
   declarations: [
     HomeComponent,
