@@ -1,4 +1,4 @@
-import { loadAllCourses } from './course.actions';
+import { loadAllCourses } from './courses.actions';
 import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";

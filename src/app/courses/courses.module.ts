@@ -28,7 +28,7 @@ import {compareCourses, Course} from './model/course';
 
 import {compareLessons, Lesson} from './model/lesson';
 import { CoursesResolver } from './courses.resolver';
-import { CoursesEffects } from './course.effects';
+import { CoursesEffects } from './courses.effects';
 import { coursesReducer } from './reducers/course.reducers';
 
 
