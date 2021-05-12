@@ -1,3 +1,4 @@
+import { CoursesDataService } from './services/courses-data.service';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HomeComponent} from './home/home.component';
@@ -88,13 +89,19 @@ const entityMetadata: EntityMetadataMap = {
   providers: [
     CoursesHttpService,
     CourseEntityService,
-    CoursesResolver
+    CoursesResolver,
+    CoursesDataService
   ]
 })
 export class CoursesModule {
 
-  constructor(private eds: EntityDefinitionService) {
+  constructor(
+    private eds: EntityDefinitionService,
+    private entityDataService: EntityDataService,
+    private coursesDataService: CoursesDataService
+  ) {
     eds.registerMetadataMap(entityMetadata); // eds for lazy loaded module
+    entityDataService.registerService('Course', coursesDataService); // tell ngrx data to use the custom data service instead of the default data service
   }
 
 
